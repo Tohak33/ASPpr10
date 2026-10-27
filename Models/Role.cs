@@ -10,5 +10,5 @@ public partial class Role
     public string RoleName { get; set; } = null!;
     public ICollection<User> Users { get; set; } = [];
 
-   
+
 }
