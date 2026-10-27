@@ -1,0 +1,19 @@
+﻿@model para.Models.Role
+@{
+    ViewData["Title"] = "Удалить роль";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h3 class="text-danger">Удалить эту роль?</h3>
+<hr class="border-secondary" />
+<div>
+    <dl class="row">
+        <dt class="col-sm-3">Название</dt>
+        <dd class="col-sm-9">@Model.RoleName</dd>
+    </dl>
+    <form asp-action="Delete" class="mt-4">
+        <input type="hidden" asp-for="RoleID" />
+        <input type="submit" value="Удалить" class="btn btn-danger me-2" />
+        <a asp-action="Index" class="btn btn-outline-secondary">Отмена</a>
+    </form>
+</div>

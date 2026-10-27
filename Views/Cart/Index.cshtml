@@ -1,0 +1,80 @@
+@model IEnumerable<para.Models.CartItem>
+@{
+    ViewData["Title"] = "Корзина";
+    decimal totalSum = Model.Sum(i => i.Quantity * i.Product.Price);
+}
+
+<div class="container mt-4">
+    <h2 class="mb-4">Корзина</h2>
+
+    @if (!Model.Any())
+    {
+        <div class="alert alert-info text-center py-4 shadow-sm border-0">
+            <h4>Ваша корзина пуста</h4>
+            <a asp-controller="Product" asp-action="Index" class="btn btn-primary mt-3">Перейти к покупкам</a>
+        </div>
+    }
+    else
+    {
+        <div class="card shadow-sm border-0 mb-4">
+            <div class="card-body p-0">
+                <table class="table table-hover align-middle mb-0">
+                    <thead class="table-light">
+                        <tr>
+                            <th class="ps-4">Товар</th>
+                            <th>Цена</th>
+                            <th class="text-center">Количество</th>
+                            <th>Сумма</th>
+                            <th class="pe-4 text-end">Действия</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td class="ps-4">
+                                    <div class="d-flex align-items-center">
+                                        <img src="@(!string.IsNullOrEmpty(item.Product.ImagePath) ? item.Product.ImagePath : "/images/placeholder.png")" alt="@item.Product.ProductName" class="rounded me-3 border" style="width: 50px; height: 50px; object-fit: cover;">
+                                        <span class="fw-bold">@item.Product.ProductName</span>
+                                    </div>
+                                </td>
+                                <td>@item.Product.Price.ToString("C")</td>
+                                <td class="text-center">
+                                    <form asp-action="Update" method="post" class="d-inline-flex align-items-center">
+                                        <input type="hidden" name="id" value="@item.CartItemID" />
+                                        <button type="submit" name="qty" value="@(item.Quantity - 1)" class="btn btn-sm btn-outline-secondary px-2">-</button>
+                                        <span class="mx-3 fw-bold">@item.Quantity</span>
+                                        <button type="submit" name="qty" value="@(item.Quantity + 1)" class="btn btn-sm btn-outline-secondary px-2">+</button>
+                                    </form>
+                                </td>
+                                <td class="fw-bold text-primary">@((item.Quantity * item.Product.Price).ToString("C"))</td>
+                                <td class="text-end pe-4">
+                                    <form asp-action="Delete" method="post">
+                                        <input type="hidden" name="id" value="@item.CartItemID" />
+                                        <button type="submit" class="btn btn-danger btn-sm">Удалить</button>
+                                    </form>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="row justify-content-end">
+            <div class="col-md-4">
+                <div class="card shadow-sm border-0 bg-light">
+                    <div class="card-body">
+                        <h4 class="d-flex justify-content-between mb-4">
+                            <span>Итого:</span>
+                            <span class="text-primary fw-bold">@totalSum.ToString("C")</span>
+                        </h4>
+                        <form asp-action="Checkout" method="post">
+                            <button type="submit" class="btn btn-success w-100 py-3 fw-bold text-uppercase">Оформить заказ</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+</div>

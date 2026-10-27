@@ -1,0 +1,35 @@
+﻿@model IEnumerable<para.Models.User>
+@{
+    ViewData["Title"] = "Пользователи";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="mt-4">
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <h2>Пользователи</h2>
+        <a asp-action="Create" class="btn btn-primary">Добавить пользователя</a>
+    </div>
+
+    <table class="table table-dark table-striped table-bordered align-middle mt-3">
+        <thead>
+            <tr>
+                <th>Логин</th>
+                <th>Роль (ID)</th>
+                <th width="200" class="text-center">Действия</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@Html.DisplayFor(modelItem => item.Login)</td>
+                    <td>@Html.DisplayFor(modelItem => item.RoleID)</td>
+                    <td class="text-center">
+                        <a asp-action="Edit" asp-route-id="@item.UserID" class="btn btn-sm btn-warning">Изменить</a>
+                        <a asp-action="Delete" asp-route-id="@item.UserID" class="btn btn-sm btn-danger">Удалить</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

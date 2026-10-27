@@ -1,0 +1,19 @@
+﻿@model para.Models.User
+@{
+    ViewData["Title"] = "Удалить пользователя";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h3 class="text-danger">Удалить этого пользователя?</h3>
+<hr class="border-secondary" />
+<div>
+    <dl class="row">
+        <dt class="col-sm-3">Логин</dt>
+        <dd class="col-sm-9">@Model.Login</dd>
+    </dl>
+    <form asp-action="Delete" class="mt-4">
+        <input type="hidden" asp-for="UserID" />
+        <input type="submit" value="Удалить" class="btn btn-danger me-2" />
+        <a asp-action="Index" class="btn btn-outline-secondary">Отмена</a>
+    </form>
+</div>

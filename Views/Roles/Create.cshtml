@@ -1,0 +1,22 @@
+﻿@model para.Models.Role
+@{
+    ViewData["Title"] = "Добавить роль";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h2>Добавление роли</h2>
+<hr class="border-secondary" />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div class="mb-4">
+                <label asp-for="RoleName" class="control-label mb-1">Название роли</label>
+                <input asp-for="RoleName" class="form-control bg-dark text-light border-secondary" required />
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Сохранить" class="btn btn-success me-2" />
+                <a asp-action="Index" class="btn btn-outline-secondary">Отмена</a>
+            </div>
+        </form>
+    </div>
+</div>

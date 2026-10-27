@@ -1,0 +1,52 @@
+﻿@model para.Models.Product
+
+@{
+    ViewData["Title"] = "Создать товар";
+}
+
+<h1>Создать</h1>
+
+<h4>Товар</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create" enctype="multipart/form-data">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group mb-3">
+                <label asp-for="CategoryID" class="control-label">Категория</label>
+                <select asp-for="CategoryID" class="form-select" asp-items="ViewBag.CategoryID"></select>
+            </div>
+            <div class="form-group mb-3">
+                <label asp-for="ProductName" class="control-label">Название</label>
+                <input asp-for="ProductName" class="form-control" />
+                <span asp-validation-for="ProductName" class="text-danger"></span>
+            </div>
+            <div class="form-group mb-3">
+                <label asp-for="Description" class="control-label">Описание</label>
+                <input asp-for="Description" class="form-control" />
+                <span asp-validation-for="Description" class="text-danger"></span>
+            </div>
+            <div class="form-group mb-3">
+                <label asp-for="StockQuantity" class="control-label">Остаток</label>
+                <input asp-for="StockQuantity" class="form-control" type="number" min="0" max="1000000" />
+                <span asp-validation-for="StockQuantity" class="text-danger"></span>
+            </div>
+            <div class="form-group mb-3">
+                <label asp-for="Price" class="control-label">Цена</label>
+                <input asp-for="Price" class="form-control" type="number" step="0.01" />
+                <span asp-validation-for="Price" class="text-danger"></span>
+            </div>
+            <div class="form-group mb-3">
+                <label class="control-label">Фото</label>
+                <input type="file" name="uploadedFile" class="form-control" accept="image/*" />
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Создать" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div class="mt-3">
+    <a asp-action="Index">Вернуться к списку</a>
+</div>

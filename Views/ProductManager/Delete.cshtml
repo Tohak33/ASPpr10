@@ -1,0 +1,25 @@
+﻿@model para.Models.Product
+@{
+    ViewData["Title"] = "Удалить товар";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="mt-4">
+    <h3 class="text-danger">Удалить этот товар?</h3>
+    <hr class="border-secondary" />
+    <div class="bg-dark p-4 rounded border border-secondary">
+        <dl class="row mb-0">
+            <dt class="col-sm-3">Название:</dt>
+            <dd class="col-sm-9 text-light">@Model.ProductName</dd>
+            <dt class="col-sm-3">Категория:</dt>
+            <dd class="col-sm-9 text-light">@Model.Category?.CategoryName</dd>
+            <dt class="col-sm-3">Цена:</dt>
+            <dd class="col-sm-9 text-light">@Model.Price.ToString("F2") руб.</dd>
+        </dl>
+    </div>
+    <form asp-action="Delete" class="mt-4">
+        <input type="hidden" asp-for="ProductID" />
+        <button type="submit" class="btn btn-danger px-4 me-2">Удалить</button>
+        <a asp-action="Index" class="btn btn-outline-secondary">Отмена</a>
+    </form>
+</div>
